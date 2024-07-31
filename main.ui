@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>535</width>
+    <width>534</width>
     <height>750</height>
    </rect>
   </property>
@@ -26,33 +26,18 @@
     <string notr="true">background-color:#98FF98;</string>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="homepage">
-    <widget class="QPushButton" name="add_employee_bt">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>120</y>
-       <width>101</width>
-       <height>91</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:white
-
-</string>
-     </property>
-     <property name="text">
-      <string>Add Employee</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="admin_report_bt">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
-       <x>150</x>
+       <x>160</x>
        <y>120</y>
-       <width>101</width>
+       <width>91</width>
        <height>91</height>
       </rect>
      </property>
@@ -68,7 +53,7 @@
       <rect>
        <x>40</x>
        <y>20</y>
-       <width>431</width>
+       <width>441</width>
        <height>51</height>
       </rect>
      </property>
@@ -86,7 +71,7 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;font: 20pt &quot;MS Shell Dlg 2&quot;;</st
       <rect>
        <x>40</x>
        <y>280</y>
-       <width>431</width>
+       <width>441</width>
        <height>441</height>
       </rect>
      </property>
@@ -99,7 +84,7 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;font: 20pt &quot;MS Shell Dlg 2&quot;;</st
       <rect>
        <x>40</x>
        <y>230</y>
-       <width>431</width>
+       <width>441</width>
        <height>41</height>
       </rect>
      </property>
@@ -115,9 +100,9 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
     <widget class="QPushButton" name="login_logout_bt">
      <property name="geometry">
       <rect>
-       <x>260</x>
+       <x>270</x>
        <y>120</y>
-       <width>101</width>
+       <width>91</width>
        <height>91</height>
       </rect>
      </property>
@@ -131,9 +116,9 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
     <widget class="QPushButton" name="salary_bt">
      <property name="geometry">
       <rect>
-       <x>370</x>
+       <x>380</x>
        <y>120</y>
-       <width>101</width>
+       <width>91</width>
        <height>91</height>
       </rect>
      </property>
@@ -142,6 +127,22 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
      </property>
      <property name="text">
       <string>Attendance</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="add_employee">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>120</y>
+       <width>91</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:white</string>
+     </property>
+     <property name="text">
+      <string>Register</string>
      </property>
     </widget>
    </widget>
@@ -199,7 +200,7 @@ color:white
       <string>Login</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_14">
+    <widget class="QPushButton" name="close_bt_2">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -267,7 +268,7 @@ color:white
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="employee_register">
+   <widget class="QWidget" name="reg_page">
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
@@ -363,7 +364,7 @@ color:white
       <string>Submit</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_4">
+    <widget class="QPushButton" name="close_register_bt">
      <property name="geometry">
       <rect>
        <x>30</x>

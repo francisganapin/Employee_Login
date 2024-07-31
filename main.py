@@ -57,9 +57,30 @@ class MyApp(QtWidgets.QWidget):
 
             #self.create_login_session()
 
+            self.close_register_bt.clicked.connect(self.homepage_page)
+            self.close_bt_2.clicked.connect(self.homepage_page)
+            self.add_employee.clicked.connect(self.register_page_bt)
+            self.login_logout_bt.clicked.connect(self.login_logout_page)
+            
+            
+            # Pages
+            self.stackedWidget = self.findChild(QStackedWidget, 'stackedWidget')
+            self.employee_login_logout_page = self.findChild(QWidget, 'employee_login_logout') # Get started page
+            self.register_page_1 = self.findChild(QWidget, 'reg_page')
+            self.homepage = self.findChild(QWidget, 'homepage')
 
         except FileNotFoundError:
             print(f"UI file {uic.loadUi} not found.")
+
+    def login_logout_page(self):
+        self.stackedWidget.setCurrentWidget(self.employee_login_logout_page)
+
+    def homepage_page(self):
+        self.stackedWidget.setCurrentWidget(self.homepage)
+
+    def register_page_bt(self):
+         self.stackedWidget.setCurrentWidget(self.register_page_1)
+     
 
     def create_database(self):
 
@@ -84,7 +105,6 @@ class MyApp(QtWidgets.QWidget):
                 print(f'Error{err}')
                 return
             #connect to my sql and create database  and check if if database is aready exist if not it would create
-
 
     def create_session(self):
         try:
