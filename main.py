@@ -117,7 +117,7 @@ class MyApp(QtWidgets.QWidget):
 
             self.cursor = self.connection.cursor()
             self.table = 'login_sessions'  # Ensure the table name is consistent
-
+            self.table_2 = 'attendance'
             # Create the table if it doesn't exist
             # seperat time and date so the system wont accept multiple login 
             # USE time so that table can only input time
@@ -131,8 +131,15 @@ class MyApp(QtWidgets.QWidget):
             FOREIGN KEY (employee_id) REFERENCES employee_data(employee_id) 
         )
         '''
+            self.query_table_2 = f'''
+        CREATE TABLE IF NOT EXISTS {self.table_2}(
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            employee_id VARCHAR(40),
+            attend BOOLEAN,
+            FOREIGN KEY (employee_id) REFERENCES employee_data(employee_id)
+        )'''
             
-
+            self.cursor.execute(self.query_table_2)
             self.cursor.execute(self.query_table)
             self.connection.commit()
             self.cursor.close()
@@ -154,12 +161,14 @@ class MyApp(QtWidgets.QWidget):
 
             self.cursor = self.connection.cursor()
             self.table = 'login_sessions'  # Ensure the table name is consistent
+            self.table_2 = 'attendance'
 
             # Get the employee_id from the input
             self.employee_id = self.login_logout_input.text()
 
             # Check if the employee_id exists in the employee_data table
             check_query = f"SELECT first_name, last_name FROM employee_data WHERE employee_id = %s"
+
             self.cursor.execute(check_query, (self.employee_id,))
             self.employee = self.cursor.fetchone()
 
@@ -181,6 +190,19 @@ class MyApp(QtWidgets.QWidget):
                     print(f"Employee {self.employee[0]} {self.employee[1]} logged in successfully.")
                     self.login_logout_label.setText(f"Employee {self.employee[0]} {self.employee[1]} logged in successfully.")
 
+                    self.check_attendance_query = f"SELECT id FROM {self.table_2} WHERE employee_id = %s"
+                    self.cursor.execute(self.check_attendance_query, (self.employee_id,))
+                    attendance_record = self.cursor.fetchone()
+
+                    if attendance_record:
+                        self.update_attendance_query = f"UPDATE {self.table_2} SET attend = TRUE WHERE employee_id = %s"
+                        self.cursor.execute(self.update_attendance_query, (self.employee_id,))
+                    else:
+                        self.insert_attendance_query = f"INSERT INTO {self.table_2} (employee_id, attend) VALUES (%s, TRUE)"
+                        self.cursor.execute(self.insert_attendance_query, (self.employee_id,))
+
+                self.connection.commit()
+
             else:
                 print(f'Employee id was not found')
                 self.login_logout_label.setText(f'Employee id was not found')
@@ -189,10 +211,7 @@ class MyApp(QtWidgets.QWidget):
             print(f'Error: {err}')
             self.login_logout_label.setText(f'Error: {err}')
 
-        finally:
-            if self.connection.is_connected():
-                self.cursor.close()
-                self.connection.close()
+      
 
     def logout_session(self):
         try:
@@ -204,7 +223,8 @@ class MyApp(QtWidgets.QWidget):
             )
 
             self.cursor = self.connection.cursor()
-            self.table = 'login_sessions'  # Ensure the table name is consistent
+            self.table = 'login_sessions'
+            self.table_2 = 'attendance'
 
             # Get the employee_id from the input
             self.employee_id = self.login_logout_input.text()
@@ -228,19 +248,34 @@ class MyApp(QtWidgets.QWidget):
                         self.cursor.execute(update_query, (self.current_time, self.employee_id, self.current_date))
                         self.connection.commit()
                         print('Logout time updated successfully.')
+
+                        # Update or insert attendance record
+                        self.check_attendance_query = f"SELECT id FROM {self.table_2} WHERE employee_id = %s"
+                        self.cursor.execute(self.check_attendance_query, (self.employee_id,))
+                        attendance_record = self.cursor.fetchone()
+
+                        if attendance_record:
+                            self.update_attendance_query = f"UPDATE {self.table_2} SET attend = FALSE WHERE employee_id = %s"
+                            self.cursor.execute(self.update_attendance_query, (self.employee_id,))
+                        else:
+                            self.insert_attendance_query = f"INSERT INTO {self.table_2} (employee_id, attend) VALUES (%s, FALSE)"
+                            self.cursor.execute(self.insert_attendance_query, (self.employee_id,))
+
+                        self.connection.commit()
+
                     else:
                         self.login_logout_label.setText('Logout time already recorded.')
                         print('Logout time already recorded.')
                 else:
-                    self.login_logout_label.setText('Logout time already recorded.')
+                    self.login_logout_label.setText('No login session found for today.')
                     print('No login session found for today.')
             else:
-                self.login_logout_label.setText('Logout time already recorded.')
+                self.login_logout_label.setText('Employee ID does not exist.')
                 print('Employee ID does not exist.')
 
         except mysql.connector.Error as err:
             print(f'Error: {err}')
-            return f'Error: {err}'
+            self.login_logout_label.setText(f'Error: {err}')
 
         finally:
             if self.connection.is_connected():
@@ -253,7 +288,6 @@ class MyApp(QtWidgets.QWidget):
         self.employee_last_name = self.employee_L_name_input.text()
         
        
-            
         try:
             self.employee_rate = float(self.employee_rate_input.text())
         except ValueError:
@@ -284,6 +318,7 @@ class MyApp(QtWidgets.QWidget):
             self.cursor = self.connection.cursor()
             self.table = 'employee_data'
 
+
             # Create the table if it doesn't exist
             self.query_table = f'''
             CREATE TABLE IF NOT EXISTS {self.table}(
@@ -294,6 +329,8 @@ class MyApp(QtWidgets.QWidget):
                 employee_rate FLOAT,
                 employee_position VARCHAR(40)
             )'''
+
+            
 
             self.cursor.execute(self.query_table)
             self.connection.commit()

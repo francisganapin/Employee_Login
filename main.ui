@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>534</width>
-    <height>750</height>
+    <height>706</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,7 +26,7 @@
     <string notr="true">background-color:#98FF98;</string>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="homepage">
     <widget class="QPushButton" name="admin_report_bt">
@@ -64,19 +64,6 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;font: 20pt &quot;MS Shell Dlg 2&quot;;</st
      </property>
      <property name="text">
       <string>Gym Nation Employee Attendance</string>
-     </property>
-    </widget>
-    <widget class="QTableView" name="tableView">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>280</y>
-       <width>441</width>
-       <height>441</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:white</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_25">
@@ -143,6 +130,35 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
      </property>
      <property name="text">
       <string>Register</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>340</y>
+       <width>201</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>290</y>
+       <width>351</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 900 italic 14pt &quot;Segoe UI&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Number of employee Attend Today</string>
      </property>
     </widget>
    </widget>
