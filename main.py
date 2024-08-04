@@ -61,16 +61,25 @@ class MyApp(QtWidgets.QWidget):
             self.close_bt_2.clicked.connect(self.homepage_page)
             self.add_employee.clicked.connect(self.register_page_bt)
             self.login_logout_bt.clicked.connect(self.login_logout_page)
+            self.debug_page_bt.clicked.connect(self.debug_page)
+            self.clear_attendance_bt.clicked.connect(self.clear_attendance)
+            self.close_bt_5.clicked.connect(self.homepage_page)
             
-            
+            self.check_attendance()
             # Pages
             self.stackedWidget = self.findChild(QStackedWidget, 'stackedWidget')
             self.employee_login_logout_page = self.findChild(QWidget, 'employee_login_logout') # Get started page
             self.register_page_1 = self.findChild(QWidget, 'reg_page')
             self.homepage = self.findChild(QWidget, 'homepage')
+            self.debug_page_1 = self.findChild(QWidget, 'debug_page_1')
+
 
         except FileNotFoundError:
             print(f"UI file {uic.loadUi} not found.")
+    
+    
+    def debug_page(self):
+        self.stackedWidget.setCurrentWidget(self.debug_page_1)
 
     def login_logout_page(self):
         self.stackedWidget.setCurrentWidget(self.employee_login_logout_page)
@@ -211,8 +220,6 @@ class MyApp(QtWidgets.QWidget):
             print(f'Error: {err}')
             self.login_logout_label.setText(f'Error: {err}')
 
-      
-
     def logout_session(self):
         try:
             self.connection = mysql.connector.connect(
@@ -287,7 +294,6 @@ class MyApp(QtWidgets.QWidget):
         self.employee_first_name = self.employee_F_name_input.text()
         self.employee_last_name = self.employee_L_name_input.text()
         
-       
         try:
             self.employee_rate = float(self.employee_rate_input.text())
         except ValueError:
@@ -365,6 +371,62 @@ class MyApp(QtWidgets.QWidget):
         except mysql.connector.Error as err:
             print(f'Error: {err}')
             return
+        
+
+    def check_attendance(self):
+        try:
+                    connection = mysql.connector.connect(
+                        host="localhost",
+                        user='root',
+                        password='root',
+                        database='Employee'
+                    )
+
+                    cursor = connection.cursor()
+                    stable_2 = 'attendance'
+                    query = f'''DELETE FROM {stable_2} '''
+                    cursor.execute(query)
+                    connection.commit()
+                    cursor.execute(query)
+                    rows = cursor.fetchall()
+
+                    for data in rows:
+                        self.str_attendance = str(data[0])
+                        self.attendance_label.setText(self.str_attendance)
+                    
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+    
+    def clear_attendance(self):
+        try:
+                    connection = mysql.connector.connect(
+                        host="localhost",
+                        user='root',
+                        password='root',
+                        database='Employee'
+                    )
+
+                    cursor = connection.cursor()
+                    stable_2 = 'attendance'
+                    query = f'''DELETE FROM {stable_2}'''
+                    cursor.execute(query)
+                    rows = cursor.fetchall()
+
+                    for data in rows:
+                        self.str_attendance = str(data[0])
+                        self.attendance_label.setText(self.str_attendance)
+                    
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+
         
 if __name__ == "__main__":
     app = QApplication(sys.argv)

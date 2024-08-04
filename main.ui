@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>534</width>
+    <width>565</width>
     <height>706</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>551</width>
+     <width>581</width>
      <height>751</height>
     </rect>
    </property>
@@ -26,18 +26,18 @@
     <string notr="true">background-color:#98FF98;</string>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="homepage">
-    <widget class="QPushButton" name="admin_report_bt">
+    <widget class="QPushButton" name="debug_page_bt">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
-       <x>160</x>
+       <x>340</x>
        <y>120</y>
-       <width>91</width>
+       <width>81</width>
        <height>91</height>
       </rect>
      </property>
@@ -45,7 +45,7 @@
       <string notr="true">background-color:white</string>
      </property>
      <property name="text">
-      <string> Admin Report</string>
+      <string>Debug</string>
      </property>
     </widget>
     <widget class="QLabel" name="label">
@@ -53,7 +53,7 @@
       <rect>
        <x>40</x>
        <y>20</y>
-       <width>441</width>
+       <width>471</width>
        <height>51</height>
       </rect>
      </property>
@@ -71,7 +71,7 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;font: 20pt &quot;MS Shell Dlg 2&quot;;</st
       <rect>
        <x>40</x>
        <y>230</y>
-       <width>441</width>
+       <width>481</width>
        <height>41</height>
       </rect>
      </property>
@@ -87,9 +87,9 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
     <widget class="QPushButton" name="login_logout_bt">
      <property name="geometry">
       <rect>
-       <x>270</x>
+       <x>240</x>
        <y>120</y>
-       <width>91</width>
+       <width>81</width>
        <height>91</height>
       </rect>
      </property>
@@ -103,9 +103,9 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
     <widget class="QPushButton" name="salary_bt">
      <property name="geometry">
       <rect>
-       <x>380</x>
+       <x>140</x>
        <y>120</y>
-       <width>91</width>
+       <width>81</width>
        <height>91</height>
       </rect>
      </property>
@@ -113,15 +113,15 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       <string notr="true">background-color:white</string>
      </property>
      <property name="text">
-      <string>Attendance</string>
+      <string>Update Data</string>
      </property>
     </widget>
     <widget class="QPushButton" name="add_employee">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>40</x>
        <y>120</y>
-       <width>91</width>
+       <width>81</width>
        <height>91</height>
       </rect>
      </property>
@@ -132,17 +132,20 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       <string>Register</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_8">
+    <widget class="QLabel" name="attendance_label">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>130</x>
        <y>340</y>
-       <width>201</width>
-       <height>71</height>
+       <width>151</width>
+       <height>121</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font:35pt &quot;Segoe UI&quot;;</string>
+     </property>
      <property name="text">
-      <string/>
+      <string>                                                                                                       </string>
      </property>
     </widget>
     <widget class="QLabel" name="label_9">
@@ -159,6 +162,25 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
      </property>
      <property name="text">
       <string>Number of employee Attend Today</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="admin_report_bt_5">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>120</y>
+       <width>81</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:white</string>
+     </property>
+     <property name="text">
+      <string>Comment</string>
      </property>
     </widget>
    </widget>
@@ -528,6 +550,82 @@ color:white
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="debug_page_1">
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>30</y>
+       <width>461</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">Background-color:red;
+color:white;
+font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
+     </property>
+     <property name="text">
+      <string>                              Debug Page</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clear_attendance_bt">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>130</y>
+       <width>131</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:white</string>
+     </property>
+     <property name="text">
+      <string>Clear Attendance</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_37">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>130</y>
+       <width>321</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">Background-color:red;
+color:white;
+font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
+     </property>
+     <property name="text">
+      <string>   This will reset the attendance </string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="close_bt_5">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>640</y>
+       <width>461</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:red;
+font: 16pt &quot;MS Shell Dlg 2&quot;;
+color:white
+</string>
+     </property>
+     <property name="text">
+      <string>Close</string>
      </property>
     </widget>
    </widget>
