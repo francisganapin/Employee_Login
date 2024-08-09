@@ -64,8 +64,8 @@ class MyApp(QtWidgets.QWidget):
             self.debug_page_bt.clicked.connect(self.debug_page)
             self.clear_attendance_bt.clicked.connect(self.clear_attendance)
             self.close_bt_5.clicked.connect(self.homepage_page)
-            
-            self.check_attendance()
+            self.check_attenance_bt.clicked.connect(self.check_attendance)
+     
             # Pages
             self.stackedWidget = self.findChild(QStackedWidget, 'stackedWidget')
             self.employee_login_logout_page = self.findChild(QWidget, 'employee_login_logout') # Get started page
@@ -377,31 +377,34 @@ class MyApp(QtWidgets.QWidget):
 
     def check_attendance(self):
         try:
-                    connection = mysql.connector.connect(
-                        host="localhost",
-                        user='root',
-                        password='root',
-                        database='Employee'
-                    )
+            connection = mysql.connector.connect(
+                host="localhost",
+                user='root',
+                password='root',
+                database='Employee'
+            )
 
-                    cursor = connection.cursor()
-                    stable_2 = 'attendance'
-                    query = f'''SELECT attend True from {stable_2} '''
-                    cursor.execute(query)
-                    connection.commit()
-                    cursor.execute(query)
-                    rows = cursor.fetchall()
+            cursor = connection.cursor()
+            stable_2 = 'attendance'
+            query =  f"SELECT COUNT(*) FROM {stable_2} WHERE attend = 1"
+            cursor.execute(query)
+            
+            rows = cursor.fetchall()
 
-                    for data in rows:
-                        self.str_attendance = str(data[0])
-                        self.attendance_label.setText(self.str_attendance)
-                    
+            if rows:
+                for data in rows:
+                    self.str_attendance = str(data[0])
+                    self.attendance_label.setText(self.str_attendance)
+            else:
+                self.attendance_label.setText("No records found.")
+            
         except mysql.connector.Error as err:
             print(f"Error: {err}")
         finally:
             if connection.is_connected():
                 cursor.close()
                 connection.close()
+
     
     def clear_attendance(self):
         try:

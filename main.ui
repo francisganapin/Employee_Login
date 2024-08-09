@@ -26,7 +26,7 @@
     <string notr="true">background-color:#98FF98;</string>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="homepage">
     <widget class="QPushButton" name="debug_page_bt">
@@ -742,7 +742,7 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       <string>   This will update Attendance</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="clear_attendance_bt_2">
+    <widget class="QPushButton" name="check_attenance_bt">
      <property name="enabled">
       <bool>true</bool>
      </property>
