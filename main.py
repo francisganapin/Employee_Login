@@ -74,19 +74,7 @@ class MyApp(QtWidgets.QWidget):
             self.debug_page_1 = self.findChild(QWidget, 'debug_page_1')
 
 
-            self.add_employee.setStyleSheet("""
-            QPushButton {
-                background-color: #6F4E37;
-                border-radius: 20px;
-                font-family: "Segoe UI";
-                font-size: 12pt;
-                color: white;
-            }
-            QPushButton:hover {
-                background-color: #2980b9;
-            }
-        """)
-
+    
 
         except FileNotFoundError:
             print(f"UI file {uic.loadUi} not found.")
