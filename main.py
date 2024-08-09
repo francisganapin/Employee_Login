@@ -74,6 +74,20 @@ class MyApp(QtWidgets.QWidget):
             self.debug_page_1 = self.findChild(QWidget, 'debug_page_1')
 
 
+            self.add_employee.setStyleSheet("""
+            QPushButton {
+                background-color: #6F4E37;
+                border-radius: 20px;
+                font-family: "Segoe UI";
+                font-size: 12pt;
+                color: white;
+            }
+            QPushButton:hover {
+                background-color: #2980b9;
+            }
+        """)
+
+
         except FileNotFoundError:
             print(f"UI file {uic.loadUi} not found.")
     
@@ -384,7 +398,7 @@ class MyApp(QtWidgets.QWidget):
 
                     cursor = connection.cursor()
                     stable_2 = 'attendance'
-                    query = f'''DELETE FROM {stable_2} '''
+                    query = f'''SELECT attend True from {stable_2} '''
                     cursor.execute(query)
                     connection.commit()
                     cursor.execute(query)
@@ -428,6 +442,8 @@ class MyApp(QtWidgets.QWidget):
                 connection.close()
 
         
+
+  
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     main_app = MyApp()

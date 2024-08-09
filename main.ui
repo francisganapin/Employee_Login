@@ -26,7 +26,7 @@
     <string notr="true">background-color:#98FF98;</string>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="homepage">
     <widget class="QPushButton" name="debug_page_bt">
@@ -37,12 +37,22 @@
       <rect>
        <x>340</x>
        <y>120</y>
-       <width>81</width>
+       <width>91</width>
        <height>91</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:white</string>
+      <string notr="true">QPushButton {
+    background-color: #6F4E37;
+    border-radius: 20px;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 12pt;
+    color: white;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+</string>
      </property>
      <property name="text">
       <string>Debug</string>
@@ -53,7 +63,7 @@
       <rect>
        <x>40</x>
        <y>20</y>
-       <width>471</width>
+       <width>491</width>
        <height>51</height>
       </rect>
      </property>
@@ -71,7 +81,7 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;font: 20pt &quot;MS Shell Dlg 2&quot;;</st
       <rect>
        <x>40</x>
        <y>230</y>
-       <width>481</width>
+       <width>491</width>
        <height>41</height>
       </rect>
      </property>
@@ -89,12 +99,22 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       <rect>
        <x>240</x>
        <y>120</y>
-       <width>81</width>
+       <width>91</width>
        <height>91</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:white</string>
+      <string notr="true">QPushButton {
+    background-color: #6F4E37;
+    border-radius: 20px;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 12pt;
+    color: white;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+</string>
      </property>
      <property name="text">
       <string>Login/logout</string>
@@ -105,12 +125,22 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       <rect>
        <x>140</x>
        <y>120</y>
-       <width>81</width>
+       <width>91</width>
        <height>91</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:white</string>
+      <string notr="true">QPushButton {
+    background-color: #6F4E37;
+    border-radius: 20px;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 12pt;
+    color: white;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+</string>
      </property>
      <property name="text">
       <string>Update Data</string>
@@ -121,12 +151,22 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       <rect>
        <x>40</x>
        <y>120</y>
-       <width>81</width>
+       <width>91</width>
        <height>91</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:white</string>
+      <string notr="true">QPushButton {
+    background-color: #6F4E37;
+    border-radius: 20px;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 12pt;
+    color: white;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+</string>
      </property>
      <property name="text">
       <string>Register</string>
@@ -145,7 +185,7 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       <string notr="true">font:35pt &quot;Segoe UI&quot;;</string>
      </property>
      <property name="text">
-      <string>                                                                                                       </string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="label_9">
@@ -172,12 +212,22 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       <rect>
        <x>440</x>
        <y>120</y>
-       <width>81</width>
+       <width>91</width>
        <height>91</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:white</string>
+      <string notr="true">QPushButton {
+    background-color: #6F4E37;
+    border-radius: 20px;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 12pt;
+    color: white;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+</string>
      </property>
      <property name="text">
       <string>Comment</string>
@@ -229,9 +279,15 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:red;
-font: 16pt &quot;MS Shell Dlg 2&quot;;
-color:white
+      <string notr="true">QPushButton {
+    background-color: red;
+    font: 16pt &quot;MS Shell Dlg 2&quot;;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
 </string>
      </property>
      <property name="text">
@@ -248,9 +304,15 @@ color:white
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:red;
-font: 16pt &quot;MS Shell Dlg 2&quot;;
-color:white
+      <string notr="true">QPushButton {
+    background-color: red;
+    font: 16pt &quot;MS Shell Dlg 2&quot;;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
 </string>
      </property>
      <property name="text">
@@ -267,9 +329,15 @@ color:white
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:red;
-font: 16pt &quot;MS Shell Dlg 2&quot;;
-color:white
+      <string notr="true">QPushButton {
+    background-color: red;
+    font: 16pt &quot;MS Shell Dlg 2&quot;;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
 </string>
      </property>
      <property name="text">
@@ -393,9 +461,15 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:red;
-font: 16pt &quot;MS Shell Dlg 2&quot;;
-color:white
+      <string notr="true">QPushButton {
+    background-color: red;
+    font: 16pt &quot;MS Shell Dlg 2&quot;;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
 </string>
      </property>
      <property name="text">
@@ -412,9 +486,15 @@ color:white
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:red;
-font: 16pt &quot;MS Shell Dlg 2&quot;;
-color:white
+      <string notr="true">QPushButton {
+    background-color: red;
+    font: 16pt &quot;MS Shell Dlg 2&quot;;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
 </string>
      </property>
      <property name="text">
@@ -585,7 +665,17 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:white</string>
+      <string notr="true">QPushButton {
+    background-color: #6F4E37;
+    border-radius: 20px;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 12pt;
+    color: white;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+</string>
      </property>
      <property name="text">
       <string>Clear Attendance</string>
@@ -619,13 +709,66 @@ font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:red;
-font: 16pt &quot;MS Shell Dlg 2&quot;;
-color:white
+      <string notr="true">QPushButton {
+    background-color: red;
+    font: 16pt &quot;MS Shell Dlg 2&quot;;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
 </string>
      </property>
      <property name="text">
       <string>Close</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_38">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>240</y>
+       <width>321</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">Background-color:red;
+color:white;
+font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
+     </property>
+     <property name="text">
+      <string>   This will update Attendance</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clear_attendance_bt_2">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>240</y>
+       <width>131</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #6F4E37;
+    border-radius: 20px;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 12pt;
+    color: white;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Check</string>
      </property>
     </widget>
    </widget>
