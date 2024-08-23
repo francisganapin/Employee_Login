@@ -40,6 +40,7 @@ class MyApp(QtWidgets.QWidget):
 
             #only accept number
             self.employee_rate_input.setValidator(QDoubleValidator(0.0, 9999.99, 2))
+            self.employee_rate_input_salary.setValidator(QDoubleValidator(0.0, 9999.99, 2))
             
             # this will automatically create database for you it was on likne 51
             self.create_database()
@@ -65,13 +66,16 @@ class MyApp(QtWidgets.QWidget):
             self.clear_attendance_bt.clicked.connect(self.clear_attendance)
             self.close_bt_5.clicked.connect(self.homepage_page)
             self.check_attenance_bt.clicked.connect(self.check_attendance)
-     
+            self.update_salary_bt.clicked.connect(self.updateSalary)
+            self.close_bt_salary.clicked.connect(self.homepage_page)
+            self.salary_bt_page.clicked.connect(self.salary_page)
             # Pages
             self.stackedWidget = self.findChild(QStackedWidget, 'stackedWidget')
             self.employee_login_logout_page = self.findChild(QWidget, 'employee_login_logout') # Get started page
             self.register_page_1 = self.findChild(QWidget, 'reg_page')
             self.homepage = self.findChild(QWidget, 'homepage')
             self.debug_page_1 = self.findChild(QWidget, 'debug_page_1')
+            self.update_salary_page = self.findChild(QWidget,'update_salary_page')
 
 
     
@@ -91,7 +95,10 @@ class MyApp(QtWidgets.QWidget):
 
     def register_page_bt(self):
          self.stackedWidget.setCurrentWidget(self.register_page_1)
-     
+
+         # it goes to salary page update salary page
+    def salary_page(self):
+        self.stackedWidget.setCurrentWidget(self.update_salary_page)
 
     def create_database(self):
 
@@ -430,9 +437,55 @@ class MyApp(QtWidgets.QWidget):
                 cursor.close()
                 connection.close()
 
-        
 
-  
+        
+    def updateSalary(self):
+        '''Update salary of employee '''
+        self.employee_rate = self.employee_rate_input_salary.text()
+        self.employee_id = self.employee_id_input_salary.text()
+        
+        try:
+            connection = mysql.connector.connect(
+                host="localhost",
+                user='root',
+                password='root',
+                database='Employee'
+            )
+            cursor = connection.cursor()
+            
+            # Check if employee_id exists
+            cursor.execute(f"SELECT * FROM employee_data WHERE employee_id = '{self.employee_id}';")
+            result = cursor.fetchone()
+
+            if not result:
+                self.salary_label_update.setText("Invalid employee ID. Please try again.")
+                return  # Exit the function if the employee ID is invalid
+            
+            # Validate the salary input
+            try:
+                self.employee_rate = int(self.employee_rate)
+            except ValueError:
+                self.salary_label_update.setText("Invalid salary input. Please enter a valid number.")
+                return  # Exit the function if the salary is invalid
+            
+            # Update the employee rate in the database
+            query = f"UPDATE employee_data SET employee_rate = {self.employee_rate} WHERE employee_id = '{self.employee_id}';"
+            cursor.execute(query)
+            connection.commit()
+
+            self.salary_label_update.setText("Salary updated successfully.")
+        
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+        
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+
+
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     main_app = MyApp()

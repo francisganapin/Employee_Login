@@ -1,0 +1,3 @@
+8/23/2024
+    -addtional update salary debug. debug command
+    -update salary gui
