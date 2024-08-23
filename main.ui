@@ -175,10 +175,10 @@ QPushButton:hover {
     <widget class="QLabel" name="attendance_label">
      <property name="geometry">
       <rect>
-       <x>130</x>
-       <y>340</y>
-       <width>151</width>
-       <height>121</height>
+       <x>380</x>
+       <y>280</y>
+       <width>121</width>
+       <height>101</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -231,6 +231,19 @@ QPushButton:hover {
      </property>
      <property name="text">
       <string>Comment</string>
+     </property>
+    </widget>
+    <widget class="QTableView" name="tableView">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>400</y>
+       <width>491</width>
+       <height>281</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:white;</string>
      </property>
     </widget>
    </widget>

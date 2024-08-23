@@ -2,11 +2,9 @@ import sys
 from datetime import datetime
 
 #################################third party import
-from PyQt6.QtWidgets import QApplication, QDialog, QLineEdit
+from PyQt6.QtWidgets import QApplication
 from PyQt6 import QtWidgets,uic
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
-from PyQt6.QtWidgets import QMessageBox
-from PyQt6.QtWidgets import QDialog, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
 from PyQt6.QtWidgets import QApplication,QStackedWidget, QWidget
 import sys
 import mysql.connector
@@ -16,6 +14,8 @@ from PyQt6.QtGui import QDoubleValidator #SET ONLY NUMERICAL NUMBER INPUT IN YOU
 from PyQt6.QtGui import QRegularExpressionValidator
 from PyQt6.QtCore import QRegularExpression
 #################
+from PyQt6.QtWidgets import QApplication, QMainWindow, QTableView, QVBoxLayout, QWidget
+from PyQt6.QtGui import QStandardItemModel, QStandardItem
 
 #################################
 class MyApp(QtWidgets.QWidget):
@@ -28,6 +28,14 @@ class MyApp(QtWidgets.QWidget):
         
             # Set fixed size to prevent resizing
             self.setFixedSize(self.size())
+
+            # Create the table view and set up the model
+            self.model_1 = QStandardItemModel()
+
+            self.model_1.setHorizontalHeaderLabels(["Id", "Employee id", "First Name", "Last Name", "Rate", "Position"])
+            self.tableView.setModel(self.model_1)
+
+
 
             self.employee_register_submit_bt.clicked.connect(self.register_employee)
 
@@ -45,6 +53,7 @@ class MyApp(QtWidgets.QWidget):
             # this will automatically create database for you it was on likne 51
             self.create_database()
             self.create_session()
+            self.show_data_base()
 
 
 
@@ -77,13 +86,15 @@ class MyApp(QtWidgets.QWidget):
             self.debug_page_1 = self.findChild(QWidget, 'debug_page_1')
             self.update_salary_page = self.findChild(QWidget,'update_salary_page')
 
-
-    
+        # Fetch and display data
+            self.show_data_base()
 
         except FileNotFoundError:
             print(f"UI file {uic.loadUi} not found.")
     
-    
+
+  
+
     def debug_page(self):
         self.stackedWidget.setCurrentWidget(self.debug_page_1)
 
@@ -483,11 +494,37 @@ class MyApp(QtWidgets.QWidget):
                 cursor.close()
                 connection.close()
 
+    def show_data_base(self):
+        try:
+            connection = mysql.connector.connect(
+                host="localhost",
+                user='root',
+                password='root',
+                database='Employee'
+            )
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM employee_data;")
+            rows = cursor.fetchall()
 
+            # Clear existing data in the model
+            self.model_1.removeRows(0, self.model_1.rowCount())
 
+            for row_data in rows:
+                items = [QStandardItem(str(data)) for data in row_data]
+                self.model_1.appendRow(items)
+
+            print('Data Fetched Successfully')
+
+        except mysql.connector.Error as e:
+            print(f'MySQL error: {e}')
+
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
+    app = QApplication([])
     main_app = MyApp()
     main_app.show()
-    sys.exit(app.exec())
+    app.exec()
