@@ -416,17 +416,15 @@ class MyApp(QtWidgets.QWidget):
                     )
 
                     cursor = connection.cursor()
-                    stable_2 = 'attendance'
-                    query = f'''DELETE FROM {stable_2}'''
+    
+                    query = f'''UPDATE attendance SET attend = 0 WHERE attend = 1'''
                     cursor.execute(query)
-                    rows = cursor.fetchall()
+                    connection.commit()
 
-                    for data in rows:
-                        self.str_attendance = str(data[0])
-                        self.attendance_label.setText(self.str_attendance)
-                    
         except mysql.connector.Error as err:
             print(f"Error: {err}")
+
+            
         finally:
             if connection.is_connected():
                 cursor.close()
