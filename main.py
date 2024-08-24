@@ -93,12 +93,14 @@ class MyApp(QtWidgets.QWidget):
             self.search_session_bt.clicked.connect(self.search_login_session)
             self.submit_attendance_bt.clicked.connect(self.search_attend_session)
             self.close_bt_6.clicked.connect(self.homepage_page)
+            self.login_record_bt.clicked.connect(self.record_page_gui)
             # Pages
             self.stackedWidget = self.findChild(QStackedWidget, 'stackedWidget')
             self.employee_login_logout_page = self.findChild(QWidget, 'employee_login_logout') # Get started page
             self.register_page_1 = self.findChild(QWidget, 'reg_page')
             self.homepage = self.findChild(QWidget, 'homepage')
             self.debug_page_1 = self.findChild(QWidget, 'debug_page_1')
+            self.login_record_page = self.findChild(QWidget, 'record_page')
             self.update_salary_page = self.findChild(QWidget,'update_salary_page')
 
         # Fetch and display data
@@ -134,6 +136,10 @@ class MyApp(QtWidgets.QWidget):
          # it goes to salary page update salary page
     def salary_page(self):
         self.stackedWidget.setCurrentWidget(self.update_salary_page)
+    
+    def record_page_gui(self):
+        self.stackedWidget.setCurrentWidget(self.login_record_page)
+
 
     def create_database(self):
 
@@ -158,6 +164,7 @@ class MyApp(QtWidgets.QWidget):
                 print(f'Error{err}')
                 return
             #connect to my sql and create database  and check if if database is aready exist if not it would create
+
     def create_session(self):
         try:
             self.connection = mysql.connector.connect()
@@ -336,6 +343,14 @@ class MyApp(QtWidgets.QWidget):
         self.employee_id = self.employee_id_input.text()
         self.employee_first_name = self.employee_F_name_input.text()
         self.employee_last_name = self.employee_L_name_input.text()
+
+
+
+
+        if len(self.employee_id) != 10:
+                self.register_label.setText("Invalid Employee Id  it must 10 character")
+                return
+            
         
         try:
             self.employee_rate = float(self.employee_rate_input.text())
