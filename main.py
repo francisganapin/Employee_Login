@@ -91,6 +91,15 @@ class MyApp(QtWidgets.QWidget):
         # Fetch and display data
             self.show_data_base()
 
+
+            self.config_server = {
+                'host':"localhost",
+                'user':'root',
+                'password':'root',
+                'database':'Employee'
+                }
+            
+
         except FileNotFoundError:
             print(f"UI file {uic.loadUi} not found.")
     
@@ -136,42 +145,50 @@ class MyApp(QtWidgets.QWidget):
                 print(f'Error{err}')
                 return
             #connect to my sql and create database  and check if if database is aready exist if not it would create
-
     def create_session(self):
         try:
-            self.connection = mysql.connector.connect(
-                host="localhost",
-                user='root',
-                password='root',
-                database='Employee'
-            )
+            self.connection = mysql.connector.connect()
 
             self.cursor = self.connection.cursor()
             self.table = 'login_sessions'  # Ensure the table name is consistent
             self.table_2 = 'attendance'
+
             # Create the table if it doesn't exist
-            # seperat time and date so the system wont accept multiple login 
-            # USE time so that table can only input time
             self.query_table = f'''
             CREATE TABLE IF NOT EXISTS {self.table} (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            employee_id VARCHAR(40),
-            login_date DATE,
-            login_time TIME,
-            logout_item TIME,
-  
-        )
-        '''
-            self.query_table_2 = f'''
-        CREATE TABLE IF NOT EXISTS {self.table_2}(
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            employee_id VARCHAR(40),
-            attend BOOLEAN,
-
-        )'''
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                employee_id VARCHAR(40),
+                login_date DATE,
+                login_time TIME,
+                logout_item TIME
+            )
+            '''
             
-            self.cursor.execute(self.query_table_2)
+            self.query_table_2 = f'''
+            CREATE TABLE IF NOT EXISTS {self.table_2}(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                employee_id VARCHAR(40),
+                attend BOOLEAN
+            )
+            '''
+                
+            # Create the employee_data table if it doesn't exist
+            self.query_table_3 = f'''
+            CREATE TABLE IF NOT EXISTS employee_data(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                employee_id VARCHAR(20) UNIQUE,
+                first_name VARCHAR(40),
+                last_name VARCHAR(40),
+                employee_rate FLOAT,
+                employee_position VARCHAR(40)
+            )
+            '''
+
+            # Execute the table creation queries
             self.cursor.execute(self.query_table)
+            self.cursor.execute(self.query_table_2)
+            self.cursor.execute(self.query_table_3)
+            
             self.connection.commit()
             self.cursor.close()
             self.connection.close()
@@ -181,14 +198,10 @@ class MyApp(QtWidgets.QWidget):
             print(f'Error: {err}')
             return f'Error: {err}'
 
+
     def login_session(self):
         try:
-            self.connection = mysql.connector.connect(
-                host="localhost",
-                user='root',
-                password='root',
-                database='Employee'
-            )
+            self.connection = mysql.connector.connect(**self.config_server)
 
             self.cursor = self.connection.cursor()
             self.table = 'login_sessions'  # Ensure the table name is consistent
@@ -244,12 +257,7 @@ class MyApp(QtWidgets.QWidget):
 
     def logout_session(self):
         try:
-            self.connection = mysql.connector.connect(
-                host="localhost",
-                user='root',
-                password='root',
-                database='Employee'
-            )
+            self.connection = mysql.connector.connect(**self.config_server)
 
             self.cursor = self.connection.cursor()
             self.table = 'login_sessions'
@@ -336,35 +344,10 @@ class MyApp(QtWidgets.QWidget):
             return  # Exit the function if the position is None or empty
 
         try:
-            self.connection = mysql.connector.connect(
-                host="localhost",
-                user='root',
-                password='root',
-                database='Employee'
-            )
-
+            self.connection = mysql.connector.connect(**self.config_server)
             self.cursor = self.connection.cursor()
-            self.table = 'employee_data'
-
-
-            # Create the table if it doesn't exist
-            self.query_table = f'''
-            CREATE TABLE IF NOT EXISTS {self.table}(
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                employee_id VARCHAR(20) UNIQUE,
-                first_name VARCHAR(40),
-                last_name VARCHAR(40),
-                employee_rate FLOAT,
-                employee_position VARCHAR(40)
-            )'''
-
-            
-
-            self.cursor.execute(self.query_table)
-            self.connection.commit()
-
             # Check if the employee already exists
-            check_query = f"SELECT * FROM {self.table} WHERE employee_id = %s"
+            check_query = f"SELECT * FROM  employee_data WHERE employee_id = %s"
             self.cursor.execute(check_query, (self.employee_id,))
             result = self.cursor.fetchone()
 
@@ -374,7 +357,7 @@ class MyApp(QtWidgets.QWidget):
             else:
                 # Insert employee data
                 self.employee_query = f'''
-                INSERT INTO {self.table} (
+                INSERT INTO employee_data (
                     employee_id, 
                     first_name, 
                     last_name, 
@@ -397,12 +380,7 @@ class MyApp(QtWidgets.QWidget):
 
     def check_attendance(self):
         try:
-            connection = mysql.connector.connect(
-                host="localhost",
-                user='root',
-                password='root',
-                database='Employee'
-            )
+            connection = mysql.connector.connect(**self.config_server)
 
             cursor = connection.cursor()
             stable_2 = 'attendance'
@@ -421,19 +399,12 @@ class MyApp(QtWidgets.QWidget):
         except mysql.connector.Error as err:
             print(f"Error: {err}")
         finally:
-            if connection.is_connected():
-                cursor.close()
-                connection.close()
+            print('none')
 
     
     def clear_attendance(self):
         try:
-                    connection = mysql.connector.connect(
-                        host="localhost",
-                        user='root',
-                        password='root',
-                        database='Employee'
-                    )
+                    connection = mysql.connector.connect(**self.config_server)
 
                     cursor = connection.cursor()
     
@@ -446,9 +417,7 @@ class MyApp(QtWidgets.QWidget):
 
             
         finally:
-            if connection.is_connected():
-                cursor.close()
-                connection.close()
+           print('wow')
 
 
         
@@ -458,12 +427,7 @@ class MyApp(QtWidgets.QWidget):
         self.employee_id = self.employee_id_input_salary.text()
         
         try:
-            connection = mysql.connector.connect(
-                host="localhost",
-                user='root',
-                password='root',
-                database='Employee'
-            )
+            connection = mysql.connector.connect(**self.config_server)
             cursor = connection.cursor()
             
             # Check if employee_id exists
