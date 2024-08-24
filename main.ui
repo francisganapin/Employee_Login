@@ -204,7 +204,7 @@ QPushButton:hover {
       <string>Number of employee Attend Today</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="admin_report_bt_5">
+    <widget class="QPushButton" name="refresh_data_bt">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -230,7 +230,7 @@ QPushButton:hover {
 </string>
      </property>
      <property name="text">
-      <string>Comment</string>
+      <string>Refresh</string>
      </property>
     </widget>
     <widget class="QTableView" name="tableView">
@@ -926,6 +926,76 @@ QPushButton:hover {
      </property>
      <property name="text">
       <string>Check</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="employee_id_input_2">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>400</y>
+       <width>461</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:white</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>360</y>
+       <width>351</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Enter Employee ID: Delete</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="submit_delete">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>460</y>
+       <width>461</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: red;
+    font: 16pt &quot;MS Shell Dlg 2&quot;;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Submit</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="delete_validator_page">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>520</y>
+       <width>461</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </widget>

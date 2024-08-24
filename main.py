@@ -78,6 +78,8 @@ class MyApp(QtWidgets.QWidget):
             self.update_salary_bt.clicked.connect(self.updateSalary)
             self.close_bt_salary.clicked.connect(self.homepage_page)
             self.salary_bt_page.clicked.connect(self.salary_page)
+            self.submit_delete.clicked.connect(self.delete_employee)
+            self.refresh_data_bt.clicked.connect(self.show_data_base)
             # Pages
             self.stackedWidget = self.findChild(QStackedWidget, 'stackedWidget')
             self.employee_login_logout_page = self.findChild(QWidget, 'employee_login_logout') # Get started page
@@ -157,7 +159,7 @@ class MyApp(QtWidgets.QWidget):
             login_date DATE,
             login_time TIME,
             logout_item TIME,
-            FOREIGN KEY (employee_id) REFERENCES employee_data(employee_id) 
+  
         )
         '''
             self.query_table_2 = f'''
@@ -165,7 +167,7 @@ class MyApp(QtWidgets.QWidget):
             id INT AUTO_INCREMENT PRIMARY KEY,
             employee_id VARCHAR(40),
             attend BOOLEAN,
-            FOREIGN KEY (employee_id) REFERENCES employee_data(employee_id)
+
         )'''
             
             self.cursor.execute(self.query_table_2)
@@ -522,6 +524,38 @@ class MyApp(QtWidgets.QWidget):
             if connection.is_connected():
                 cursor.close()
                 connection.close()
+
+
+    def delete_employee(self):
+        self.employee_id_2 = self.employee_id_input_2.text()
+
+        try:
+            connection = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='root',
+                database='Employee'
+            )
+            cursor = connection.cursor()
+            
+            # Use parameterized query to prevent SQL injection
+            delete_query = f"DELETE FROM employee_data WHERE employee_id = '{self.employee_id_2}'"
+            cursor.execute(delete_query)
+            connection.commit()
+
+            if cursor.rowcount == 0:
+                self.delete_validator_page.setText('Invalid employee ID. Try again.')
+            else:
+                self.delete_validator_page.setText('Employee deleted successfully.')
+
+        except mysql.connector.Error as e:
+            print(f'MySQL error: {e}')
+
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+
 
 if __name__ == "__main__":
     app = QApplication([])
