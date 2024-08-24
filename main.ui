@@ -281,7 +281,7 @@ QPushButton:hover {
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>40</y>
+       <y>80</y>
        <width>331</width>
        <height>192</height>
       </rect>
@@ -294,13 +294,132 @@ QPushButton:hover {
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>290</y>
+       <y>320</y>
        <width>531</width>
        <height>211</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color:white;</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="employee_id_input_3">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>80</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:white</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="login_session_input">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>540</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:white</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="submit_attendance_bt">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>120</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: red;
+    font: 16pt &quot;MS Shell Dlg 2&quot;;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="search_session_bt">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>540</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: red;
+    font: 16pt &quot;MS Shell Dlg 2&quot;;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>531</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">Background-color:red;
+color:white;
+font: 16pt &quot;MS Shell Dlg 2&quot;;font: 20pt &quot;MS Shell Dlg 2&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Gym Nation Employee Attendance</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="close_bt_6">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>620</y>
+       <width>461</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: red;
+    font: 16pt &quot;MS Shell Dlg 2&quot;;
+    color: white;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Close</string>
      </property>
     </widget>
    </widget>

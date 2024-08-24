@@ -90,6 +90,9 @@ class MyApp(QtWidgets.QWidget):
             self.salary_bt_page.clicked.connect(self.salary_page)
             self.submit_delete.clicked.connect(self.delete_employee)
             self.refresh_data_bt.clicked.connect(self.show_data_base)
+            self.search_session_bt.clicked.connect(self.search_login_session)
+            self.submit_attendance_bt.clicked.connect(self.search_attend_session)
+            self.close_bt_6.clicked.connect(self.homepage_page)
             # Pages
             self.stackedWidget = self.findChild(QStackedWidget, 'stackedWidget')
             self.employee_login_logout_page = self.findChild(QWidget, 'employee_login_logout') # Get started page
@@ -554,8 +557,39 @@ class MyApp(QtWidgets.QWidget):
                 cursor.close()
                 connection.close()
 
+    def search_login_session(self):
 
+        self_employee_login_session = self.login_session_input.text()
+        connection = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='root',
+                database='Employee'
+            )
+        self.cursor = connection.cursor()
+        self.query= 'SELECT id,employee_id,login_date,login_time,logout_item FROM login_sessions WHERE 1=1'
+        self.params = []
+        
+        if self_employee_login_session:
+            self.query += ' AND employee_id LIKE %s'
+            self.params.append(f"%{self_employee_login_session}%")
 
+        try: 
+            self.cursor.execute(self.query, self.params)
+            self.rows = self.cursor.fetchall()
+            self.model_3.removeRows(0, self.model_3.rowCount())
+
+            for row_data in self.rows:
+                items = [QStandardItem(str(data)) for data in row_data]
+                self.model_3.appendRow(items)
+
+            print('Search Results Fetched Successfully')
+        except mysql.connector.Error as e:
+            print(f'Sqlite error: {e}')
+        finally:
+            if connection.is_connected():
+                self.cursor.close()
+                connection.close()
 
     def delete_employee(self):
         self.employee_id_2 = self.employee_id_input_2.text()
@@ -588,6 +622,76 @@ class MyApp(QtWidgets.QWidget):
                 connection.close()
 
 
+    def search_login_session(self):
+
+        self_employee_login_session = self.login_session_input.text()
+        connection = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='root',
+                database='Employee'
+            )
+        self.cursor = connection.cursor()
+        self.query= 'SELECT id,employee_id,login_date,login_time,logout_item FROM login_sessions WHERE 1=1'
+        self.params = []
+        
+        if self_employee_login_session:
+            self.query += ' AND employee_id LIKE %s'
+            self.params.append(f"%{self_employee_login_session}%")
+
+        try: 
+            self.cursor.execute(self.query, self.params)
+            self.rows = self.cursor.fetchall()
+            self.model_3.removeRows(0, self.model_3.rowCount())
+
+            for row_data in self.rows:
+                items = [QStandardItem(str(data)) for data in row_data]
+                self.model_3.appendRow(items)
+
+            print('Search Results Fetched Successfully')
+        except mysql.connector.Error as e:
+            print(f'Sqlite error: {e}')
+        finally:
+            if connection.is_connected():
+                self.cursor.close()
+                connection.close()
+
+
+    def search_attend_session(self):
+
+        self.employee_attendance = self.employee_id_input_3.text()
+        connection = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='root',
+                database='Employee'
+            )
+        self.cursor = connection.cursor()
+        self.query= 'SELECT id,employee_id,attend FROM attendance WHERE 1=1'
+        self.params = []
+        
+        if self.employee_attendance:
+            self.query += ' AND employee_id LIKE %s'
+            self.params.append(f"%{self.employee_attendance}%")
+
+        try: 
+            self.cursor.execute(self.query, self.params)
+            self.rows = self.cursor.fetchall()
+            self.model_2.removeRows(0, self.model_2.rowCount())
+
+            for row_data in self.rows:
+                items = [QStandardItem(str(data)) for data in row_data]
+                self.model_2.appendRow(items)
+
+            print('Search Results Fetched Successfully')
+        except mysql.connector.Error as e:
+            print(f'Sqlite error: {e}')
+        finally:
+            if connection.is_connected():
+                self.cursor.close()
+                connection.close()
+
+        
 if __name__ == "__main__":
     app = QApplication([])
     main_app = MyApp()
