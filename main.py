@@ -31,11 +31,19 @@ class MyApp(QtWidgets.QWidget):
 
             # Create the table view and set up the model
             self.model_1 = QStandardItemModel()
-
             self.model_1.setHorizontalHeaderLabels(["Id", "Employee id", "First Name", "Last Name", "Rate", "Position"])
             self.tableView.setModel(self.model_1)
 
 
+            
+            # Create the table view and set up the model
+            self.model_2 = QStandardItemModel()
+            self.model_2.setHorizontalHeaderLabels(["Id", "Employee id", "Attend"])
+            self.tableView_2.setModel(self.model_2)
+
+            self.model_3 = QStandardItemModel()
+            self.model_3.setHorizontalHeaderLabels(['Id','Employee Id','Date','Login','Logout'])
+            self.tableView_3.setModel(self.model_3)
 
             self.employee_register_submit_bt.clicked.connect(self.register_employee)
 
@@ -54,6 +62,8 @@ class MyApp(QtWidgets.QWidget):
             self.create_database()
             self.create_session()
             self.show_data_base()
+            self.show_attendance_attendance()
+            self.show_login_session()
 
 
 
@@ -488,6 +498,63 @@ class MyApp(QtWidgets.QWidget):
             if connection.is_connected():
                 cursor.close()
                 connection.close()
+
+
+    def show_attendance_attendance(self):
+        try:
+            connection = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='root',
+                database='Employee'
+            )
+            cursor = connection.cursor()
+            cursor.execute('SELECT * FROM attendance')
+            rows = cursor.fetchall()
+
+            self.model_2.removeRows(0,self.model_2.rowCount())
+
+            for row_data in rows:
+                items =[QStandardItem(str(data)) for data in row_data]
+                self.model_2.appendRow(items)
+
+            print('Data Fetched sucessfully')
+        except mysql.connector.Error as e:
+            print(f'')
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+
+
+
+
+    def show_login_session(self):
+        try:
+            connection = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='root',
+                database='Employee'
+            )
+            cursor = connection.cursor()
+            cursor.execute('SELECT * FROM login_sessions')
+            rows = cursor.fetchall()
+
+            self.model_3.removeRows(0,self.model_3.rowCount())
+
+            for row_data in rows:
+                items =[QStandardItem(str(data))for data in row_data]
+                self.model_3.appendRow(items)
+            
+        except mysql.connector.Error as e:
+            print('g')
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+
+
 
 
     def delete_employee(self):
