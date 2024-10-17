@@ -28,5 +28,5 @@ To set up your environment, ensure you have the following installed:
 
 
 
-  -Front Page
+
 ![image](https://github.com/user-attachments/assets/1e42fedb-07d9-4afb-bb0d-9b8add929ebc)
