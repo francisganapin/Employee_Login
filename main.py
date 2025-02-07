@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import QApplication,QStackedWidget, QWidget
 import sys
 import mysql.connector
 from PyQt6.QtGui import QDoubleValidator #SET ONLY NUMERICAL NUMBER INPUT IN YOUR QLINE EDIT
-
+from PyQt6.QtCore import QTimer
 ################# only accept letters and space no number
 from PyQt6.QtGui import QRegularExpressionValidator
 from PyQt6.QtCore import QRegularExpression
@@ -397,6 +397,14 @@ class MyApp(QtWidgets.QWidget):
                 self.connection.commit()
                 self.register_label.setText(f'Employee with ID {self.employee_id}')
                 print(f'Employee with ID {self.employee_id} and name {self.employee_first_name} was created')
+
+                self.register_label.setText(f'Employee with ID {self.employee_id} was created')
+
+                self.employee_position_input.clear()
+                self.employee_id_input.clear()
+                self.employee_F_name_input.clear()
+                self.employee_L_name_input.clear()
+                QTimer.singleShot(7000, lambda: self.register_label.clear())
 
             self.cursor.close()
             self.connection.close()

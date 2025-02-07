@@ -26,7 +26,7 @@
     <string notr="true">background-color:#98FF98;</string>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="homepage">
     <widget class="QPushButton" name="debug_page_bt">
@@ -295,7 +295,7 @@ QPushButton:hover {
       <rect>
        <x>40</x>
        <y>370</y>
-       <width>531</width>
+       <width>461</width>
        <height>161</height>
       </rect>
      </property>
