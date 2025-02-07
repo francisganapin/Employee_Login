@@ -14,8 +14,10 @@ from PyQt6.QtCore import QTimer
 from PyQt6.QtGui import QRegularExpressionValidator
 from PyQt6.QtCore import QRegularExpression
 #################
-from PyQt6.QtWidgets import QApplication, QMainWindow, QTableView, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import QApplication,QWidget
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
+
+from register_function import RegisterEmployeeClass
 
 #################################
 class MyApp(QtWidgets.QWidget):
@@ -45,7 +47,10 @@ class MyApp(QtWidgets.QWidget):
             self.model_3.setHorizontalHeaderLabels(['Id','Employee Id','Date','Login','Logout'])
             self.tableView_3.setModel(self.model_3)
 
-            self.employee_register_submit_bt.clicked.connect(self.register_employee)
+
+            self.intialize = RegisterEmployeeClass(self)
+
+            self.employee_register_submit_bt.clicked.connect(self.intialize.register_employee)
 
 
             # Allow only letters and spaces
@@ -339,80 +344,7 @@ class MyApp(QtWidgets.QWidget):
                 self.cursor.close()
                 self.connection.close()
 
-    def register_employee(self):
-        self.employee_id = self.employee_id_input.text()
-        self.employee_first_name = self.employee_F_name_input.text()
-        self.employee_last_name = self.employee_L_name_input.text()
-
-
-
-
-        if len(self.employee_id) != 10:
-                self.register_label.setText("Invalid Employee Id  it must 10 character")
-                return
-            
-        
-        try:
-            self.employee_rate = float(self.employee_rate_input.text())
-        except ValueError:
-            self.register_label.setText("Invalid employee rate.Try again.")
-            return
-
-        self.employee_position = self.employee_position_input.currentText()
-
-
-        # Validate all required fields
-        if not (self.employee_id and self.employee_first_name and self.employee_last_name and self.employee_position):
-            self.register_label.setText('Incomplete data. Please fill out all fields.')
-            return  # Exit the function if any required field is missing
-
-        # Check if employee_position is None or empty
-        if self.employee_position is None or not self.employee_position.strip():
-            self.register_label.setText('Employee position cannot be None or empty.')
-            return  # Exit the function if the position is None or empty
-
-        try:
-            self.connection = mysql.connector.connect(**self.config_server)
-            self.cursor = self.connection.cursor()
-            # Check if the employee already exists
-            check_query = f"SELECT * FROM  employee_data WHERE employee_id = %s"
-            self.cursor.execute(check_query, (self.employee_id,))
-            result = self.cursor.fetchone()
-
-            if result:
-                print(f'Employee with ID {self.employee_id} already exists.')
-                self.register_label.setText(f'Employee with ID {self.employee_id} already exists.')
-            else:
-                # Insert employee data
-                self.employee_query = f'''
-                INSERT INTO employee_data (
-                    employee_id, 
-                    first_name, 
-                    last_name, 
-                    employee_rate, 
-                    employee_position)
-                    VALUES (%s, %s, %s, %s, %s)'''
-
-                self.cursor.execute(self.employee_query, (self.employee_id, self.employee_first_name, self.employee_last_name, self.employee_rate, self.employee_position))
-                self.connection.commit()
-                self.register_label.setText(f'Employee with ID {self.employee_id}')
-                print(f'Employee with ID {self.employee_id} and name {self.employee_first_name} was created')
-
-                self.register_label.setText(f'Employee with ID {self.employee_id} was created')
-
-                self.employee_position_input.clear()
-                self.employee_id_input.clear()
-                self.employee_F_name_input.clear()
-                self.employee_L_name_input.clear()
-                QTimer.singleShot(7000, lambda: self.register_label.clear())
-
-            self.cursor.close()
-            self.connection.close()
-
-        except mysql.connector.Error as err:
-            print(f'Error: {err}')
-            return
-        
+   
 
     def check_attendance(self):
         try:
