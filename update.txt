@@ -1,6 +1,7 @@
 2/7/2025
     update data register will clear the input text if successful 
     and show label and clear the label after 1 seconds
+    we already fix the register class into register_function.py
 
 8/24/2024
 	- ability to delete employee
